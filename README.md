@@ -1,28 +1,7 @@
 # Yet Enibla
 
-A simple restaurant review website built with Razor Pages and Tailwind CSS. The app is containerized with Docker and deployed on an Azure Ubuntu server.
+YetEnibla is a simple restaurant review website built using ASP.NET Core Razor Pages and styled with Tailwind CSS.
 
-## Tech Stack
+It allows users to add and view restaurants with details like name, description, and location.
 
-- ASP.NET Core (Razor Pages)
-- Tailwind CSS
-- Postgres (Entity Framework Core)
-- Docker
-- Azure (Ubuntu Server)
-
-## Features
-
-- Add and list restaurants
-- Form validation with Data Annotations
-- Responsive UI using Tailwind CSS
-
-## Running Locally
-
-```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
-docker build -t yetenibla .
-docker run -d -p 5000:80 yetenibla
-```
-
-Then open httP//localhost:3000 in your browser.
+The project is containerized with Docker and deployed on an Azure-hosted Ubuntu server for easy deployment and scalability.
