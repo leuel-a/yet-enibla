@@ -1,20 +1,27 @@
-﻿@page
+﻿@page "/"
 @model IndexModel
 @{
 }
 
-<div class="w-[80%] bg-inherit mx-auto h-full mt-6">
+<div>
   <div class="flex justify-between items-center">
     <input class="h-10 rounded-md border text-yellow-900 border-yellow-900 pl-5 placeholder:text-yellow-800"
            placeholder="Search for the right place..."/>
-    <ul class="flex items-center gap-4">
-      <li>
-        <button class="border border-yellow-700 text-yellow-900 px-6 py-1.5">Featured</button>
-      </li>
-      <li>
-        <button class="border border-yellow-700 text-yellow-900 px-6 py-1.5">Popular</button>
-      </li>
-    </ul>
+    <div class="flex items-center gap-10">
+      <ul class="flex items-center gap-4">
+        <li>
+          <button class="border border-yellow-700 text-yellow-900 px-6 py-1.5">Featured</button>
+        </li>
+        <li>
+          <button class="border border-yellow-700 text-yellow-900 px-6 py-1.5">Popular</button>
+        </li>
+      </ul>
+      <button class="bg-yellow-900 hover:shadow-sm hover:shadow-yellow-900 text-white rounded-md border border-white p-10 py-2">
+        <a asp-page="/restaurants/create">
+          Add Restaurant
+        </a>
+      </button>
+    </div>
   </div>
   <div></div>
 </div>

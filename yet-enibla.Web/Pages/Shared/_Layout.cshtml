@@ -1,34 +1,41 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Discover and Eat with Confidence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="~/css/resets.css" asp-append-version="true" />
-  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-  <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
-  <link rel="stylesheet" href="~/yet_enibla.Web.styles.css" asp-append-version="true" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="~/css/resets.css" asp-append-version="true"/>
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+  <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true"/>
+  <link rel="stylesheet" href="~/yet_enibla.Web.styles.css" asp-append-version="true"/>
 </head>
 <body class="font-poppins bg-gray-100">
 <header class="bg-yellow-900 h-20 text-white flex justify-center items-center">
   <div class="w-[80%] flex gap-10 justify-between items-center">
     <div class="flex gap-10 items-center">
-      <h1 class="text-white text-2xl font-medium">YetEnibla</h1>
+      <a asp-page="/index" class="cursor-pointer text-white text-2xl font-medium">YetEnibla</a>
       <nav>
         <ul class="flex align-center gap-10">
-          <li>Restaurants</li>
-          <li>Reviews</li>
+          <li>
+            <a asp-page="/restaurants/index" class="cursor-pointer hover:underline hover:underline-offset-[10px]">
+              Restaurants
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
     <div class="flex gap-2 items-center">
-      <button class="bg-white hover:bg-yellow-900 hover:text-white hover:border-white hover:shadow-sm hover:shadow-white text-yellow-900 rounded-md border border-white p-10 py-2">
+      <button
+        class="bg-white hover:bg-yellow-900 hover:text-white hover:border-white hover:shadow-sm hover:shadow-white text-yellow-900 rounded-md border border-white p-10 py-2">
         Login
       </button>
-      <button class="bg-white hover:bg-yellow-900 hover:text-white hover:border-white hover:shadow-sm hover:shadow-white text-yellow-900 rounded-md border border-white p-10 py-2">
+      <button
+        class="bg-white hover:bg-yellow-900 hover:text-white hover:border-white hover:shadow-sm hover:shadow-white text-yellow-900 rounded-md border border-white p-10 py-2">
         Are you an Owner?
       </button>
     </div>
@@ -36,8 +43,14 @@
 </header>
 
 <main role="main" class="h-screen">
-  @RenderBody()
+  <div class="w-[80%] bg-inherit mx-auto h-full mt-6">
+    @RenderBody()
+  </div>
 </main>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 
 @await RenderSectionAsync("Scripts", required: false)
 
