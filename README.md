@@ -1,4 +1,4 @@
-# YetEnibla – Restaurant Review Website
+# Yet Enibla
 
 A simple restaurant review website built with Razor Pages and Tailwind CSS. The app is containerized with Docker and deployed on an Azure Ubuntu server.
 
