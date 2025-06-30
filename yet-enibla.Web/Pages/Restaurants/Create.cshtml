@@ -6,45 +6,45 @@
 }
 
 <div>
-  <form class="flex flex-col align-start gap-4">
+  <form method="post" class="flex flex-col align-start gap-4">
     <div class="w-full flex flex-col">
-      <label asp-for="Restaurant.Name" class="block font-medium text-yellow-900"></label>
-      <input asp-for="Restaurant.Name" class="h-10 w-[50%] border rounded-md p-2 text-yellow-900"/>
-      <span asp-validation-for="Restaurant.Name" class="text-red-500 text-sm"></span>
+      <label asp-for="CreateRestaurantValue.Name" class="block font-medium text-yellow-900"></label>
+      <input asp-for="CreateRestaurantValue.Name" class="h-10 w-[50%] border rounded-md p-2 text-yellow-900"/>
+      <span asp-validation-for="CreateRestaurantValue.Name" class="text-red-500 text-sm"></span>
     </div>
     <div class="w-full flex flex-col">
-      <label asp-for="Restaurant.Description" class="block font-medium text-yellow-900"></label>
-      <textarea rows="10" asp-for="Restaurant.Description"
+      <label asp-for="CreateRestaurantValue.Description" class="block font-medium text-yellow-900"></label>
+      <textarea rows="10" asp-for="CreateRestaurantValue.Description"
                 class="border rounded-md p-2 text-yellow-900"></textarea>
-      <span asp-validation-for="Restaurant.Description" class="text-red-500 text-sm"></span>
+      <span asp-validation-for="CreateRestaurantValue.Description" class="text-red-500 text-sm"></span>
     </div>
     <div class="w-full flex justify-evenly gap-2">
       <div class="flex flex-col w-1/2">
-        <label asp-for="Restaurant.PhoneNumber" class="block font-medium text-yellow-900">Phone Number</label>
-        <input asp-for="Restaurant.PhoneNumber" class="h-10 border rounded-md p-2 text-yellow-900"/>
-        <span asp-validation-for="Restaurant.PhoneNumber" class="text-red-500 text-sm"></span>
+        <label asp-for="CreateRestaurantValue.PhoneNumber" class="block font-medium text-yellow-900">Phone Number</label>
+        <input asp-for="CreateRestaurantValue.PhoneNumber" class="h-10 border rounded-md p-2 text-yellow-900"/>
+        <span asp-validation-for="CreateRestaurantValue.PhoneNumber" class="text-red-500 text-sm"></span>
       </div>
       <div class="flex flex-col w-1/2">
-        <label asp-for="Restaurant.Website" class="block font-medium text-yellow-900"></label>
-        <input asp-for="Restaurant.Website" class="h-10 border rounded-md p-2 text-yellow-900"/>
-        <span asp-validation-for="Restaurant.Website" class="text-red-500 text-sm"></span>
+        <label asp-for="CreateRestaurantValue.Website" class="block font-medium text-yellow-900"></label>
+        <input asp-for="CreateRestaurantValue.Website" class="h-10 border rounded-md p-2 text-yellow-900"/>
+        <span asp-validation-for="CreateRestaurantValue.Website" class="text-red-500 text-sm"></span>
       </div>
     </div>
     <div class="w-full flex justify-evenly gap-2">
       <div class="flex flex-col w-1/3">
-        <label asp-for="Restaurant.Address" class="block font-medium text-yellow-900"></label>
-        <input asp-for="Restaurant.Address" class="h-10 border rounded-md p-2 text-yellow-900"/>
-        <span asp-validation-for="Restaurant.Address" class="text-red-500 text-sm"></span>
+        <label asp-for="CreateRestaurantValue.Address" class="block font-medium text-yellow-900"></label>
+        <input asp-for="CreateRestaurantValue.Address" class="h-10 border rounded-md p-2 text-yellow-900"/>
+        <span asp-validation-for="CreateRestaurantValue.Address" class="text-red-500 text-sm"></span>
       </div>
       <div class="flex flex-col w-1/3">
-        <label asp-for="Restaurant.City" class="block font-medium text-yellow-900"></label>
-        <input asp-for="Restaurant.City" class="h-10 border rounded-md p-2 text-yellow-900"/>
-        <span asp-validation-for="Restaurant.City" class="text-red-500 text-sm"></span>
+        <label asp-for="CreateRestaurantValue.City" class="block font-medium text-yellow-900"></label>
+        <input asp-for="CreateRestaurantValue.City" class="h-10 border rounded-md p-2 text-yellow-900"/>
+        <span asp-validation-for="CreateRestaurantValue.City" class="text-red-500 text-sm"></span>
       </div>
       <div class="flex flex-col w-1/3">
-        <label asp-for="Restaurant.Country" class="block font-medium text-yellow-900"></label>
-        <input asp-for="Restaurant.Country" class="h-10 border rounded-md p-2 text-yellow-900"/>
-        <span asp-validation-for="Restaurant.Country" class="text-red-500 text-sm"></span>
+        <label asp-for="CreateRestaurantValue.Country" class="block font-medium text-yellow-900"></label>
+        <input asp-for="CreateRestaurantValue.Country" class="h-10 border rounded-md p-2 text-yellow-900"/>
+        <span asp-validation-for="CreateRestaurantValue.Country" class="text-red-500 text-sm"></span>
       </div>
     </div>
     <div class="w-full flex justify-end mt-20 gap-2">

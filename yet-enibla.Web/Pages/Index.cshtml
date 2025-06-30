@@ -16,12 +16,38 @@
           <button class="border border-yellow-700 text-yellow-900 px-6 py-1.5">Popular</button>
         </li>
       </ul>
-      <button class="bg-yellow-900 hover:shadow-sm hover:shadow-yellow-900 text-white rounded-md border border-white p-10 py-2">
+      <button
+        class="bg-yellow-900 hover:shadow-sm hover:shadow-yellow-900 text-white rounded-md border border-white p-10 py-2">
         <a asp-page="/restaurants/create">
           Add Restaurant
         </a>
       </button>
     </div>
   </div>
-  <div></div>
+  <div class="mt-6">
+    @if (!Model.Restaurants.Any())
+    {
+      <p>No restaurants found.</p>
+    }
+    else
+    {
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        @foreach (var restaurant in Model.Restaurants)
+        {
+          <div class="border border-yellow-900 border-solid rounded p-4 shadow-md">
+            <div class="mb-10">
+              <h3 class="text-xl font-bold text-yellow-900">@restaurant.Name</h3>
+              <p>@restaurant.City, @restaurant.Country</p>
+           </div> 
+            <p>@restaurant.Description</p>
+            <div class="mt-2">
+              <a href="@restaurant.Website" target="_blank" class="text-blue-600">Website</a>
+              <span class="mx-2">|</span>
+              <span>@restaurant.PhoneNumber</span>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
 </div>

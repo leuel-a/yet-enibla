@@ -1,22 +1,38 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using yet_enibla.Web.Data;
 using yet_enibla.Web.Models;
 
 namespace yet_enibla.Web.Pages.Restaurants;
 
 public class Create : PageModel
 {
-    public void OnGet() { }
+    private readonly AppDbContext _dbContext;
+    private readonly ILogger<Create> _logger;
 
-    [BindProperty] public Restaurant Restaurant { get; set; } = new();
-    
-    public async Task<IActionResult> OnPostAsync()
+    public Create(AppDbContext dbContext, ILogger<Create> logger)
     {
-        WriteLine(Restaurant);
-        
-        if (!ModelState.IsValid)
-            return Page();
+        _logger = logger;
+        _dbContext = dbContext;
+    }
 
-        return RedirectToPage("/Restaurants/Index");
+    public void OnGet()
+    {
+    }
+
+    [BindProperty] public Restaurant CreateRestaurantValue { get; set; } = new();
+
+    public async Task<IActionResult> OnPost()
+    {
+        if (!ModelState.IsValid) return Page();
+
+        _logger.LogInformation(CreateRestaurantValue.ToJson());
+        Debug.Assert(_dbContext.Restaurants != null, "_dbContext.Restaurants != null, the table exists");
+
+        await _dbContext.Restaurants.AddAsync(CreateRestaurantValue);
+        await _dbContext.SaveChangesAsync();
+
+        return RedirectToPage("/index");
     }
 }

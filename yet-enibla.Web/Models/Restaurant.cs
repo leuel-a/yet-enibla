@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace yet_enibla.Web.Models;
@@ -29,4 +30,19 @@ public class Restaurant
 
     [Required, StringLength(100)]
     public string Country { get; set; } = string.Empty;
+
+    public override string ToString()
+    {
+        return $"{Name} ({City}, {Country})";
+    }
+
+    public string ToJson() => 
+        JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+
+    public void Deconstruct(out string? name, out string? city, out string? country)
+    {
+        name = Name;
+        city = City;
+        country = Country;
+    }
 }
