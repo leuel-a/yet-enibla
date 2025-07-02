@@ -49,5 +49,10 @@
         }
       </div>
     }
+    <div class="flex justify-center items-center gap-2 mt-8">
+      @await Html.PartialAsync("_ButtonPartial", "Next")
+      <p class="block border border-yellow-50 p-2">@Model.CurrentPage</p>
+      @await Html.PartialAsync("_ButtonPartial", "Previous")
+    </div>
   </div>
 </div>

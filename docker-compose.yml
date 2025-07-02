@@ -1,0 +1,27 @@
+services:
+  app:
+    image: yet-enibla-dev:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      - ASPNETCORE_URLS=http://+:3000
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=yet_enibla_dev_db;Username=leuel;Password=LeuelAsfaw713
+    ports:
+      - "3000:3000"
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=yet_enibla_dev_db
+      - POSTGRES_USER=leuel
+      - POSTGRES_PASSWORD=LeuelAsfaw713
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  pgdata:

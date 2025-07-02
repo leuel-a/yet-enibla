@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="flex flex-col min-h-screen">
+<html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true"/>
   <link rel="stylesheet" href="~/yet_enibla.Web.styles.css" asp-append-version="true"/>
 </head>
-<body class="font-poppins bg-gray-100">
+<body class="flex flex-col font-poppins bg-gray-100 min-h-screen">
 <header class="bg-yellow-900 h-20 text-white flex justify-center items-center">
   <div class="w-[80%] flex gap-10 justify-between items-center">
     <div class="flex gap-10 items-center">
@@ -30,11 +30,11 @@
     </div>
     <div class="flex gap-2 items-center">
       <button
-        class="bg-white hover:bg-yellow-900 hover:text-white hover:border-white hover:shadow-sm hover:shadow-white text-yellow-900 rounded-md border border-white p-10 py-2">
+        class="bg-white hover:bg-yellow-50 hover:border-white hover:shadow-sm hover:shadow-white text-yellow-900 rounded border border-white p-10 py-2">
         Login
       </button>
       <button
-        class="bg-white hover:bg-yellow-900 hover:text-white hover:border-white hover:shadow-sm hover:shadow-white text-yellow-900 rounded-md border border-white p-10 py-2">
+        class="bg-white hover:bg-yellow-50 hover:border-white hover:shadow-sm hover:shadow-white text-yellow-900 rounded border border-white p-10 py-2">
         Are you an Owner?
       </button>
     </div>
@@ -42,12 +42,14 @@
 </header>
 
 <main role="main">
-<div class="w-[80%] bg-inherit mx-auto h-full py-6">
+<div class="w-[80%] flex-2 bg-inherit mx-auto py-6">
     @RenderBody()
   </div>
 </main>
 
-<footer class="h-96 mt-auto bg-yellow-900"></footer>
+<div class="flex flex-col h-36">
+  <footer class="h-full bg-yellow-900"></footer>
+</div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

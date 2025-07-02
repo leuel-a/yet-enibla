@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using yet_enibla.Web.Data;
@@ -11,6 +12,12 @@ public class IndexModel : PageModel
     private readonly AppDbContext _dbContext;
     private readonly ILogger<IndexModel> _logger;
 
+    [BindProperty(SupportsGet = true)]
+    public int CurrentPage { get; set; } = 1;
+    public int Limit { get; set; } = 8;
+    public int Total { get; set; }
+
+
     public IndexModel(AppDbContext dbContext, ILogger<IndexModel> logger)
     {
         _dbContext = dbContext;
@@ -21,8 +28,20 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        Debug.Assert(_dbContext.Restaurants != null, "_dbContext.Restaurants != null, the table exists");;
-        Restaurants = await _dbContext.Restaurants.ToListAsync();
-        _logger.LogInformation("Retrieved {Count} restaurants.", Restaurants.Count);
+        try
+        {
+            Debug.Assert(_dbContext.Restaurants != null, "_dbContext.Restaurants != null, the table exists"); ;
+
+            var query = _dbContext.Restaurants.AsNoTracking();
+            Total = await query.CountAsync();
+
+            Restaurants = await _dbContext.Restaurants.Skip((CurrentPage - 1) * Limit).Take(Limit).ToListAsync();
+            _logger.LogInformation("Retrieved {Count} restaurants.", Restaurants.Count);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("Unexpected error retrieving restaurants: {Message}", e.Message);
+            Restaurants = new List<Restaurant>();
+        }
     }
 }

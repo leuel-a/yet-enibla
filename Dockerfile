@@ -1,48 +1,57 @@
-# use the .net sdk image for building the application
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+# STAGE 1 ->> Build Stage
+FROM ubuntu:22.04 AS build
 
-# install required packages and node via nvm
-RUN apt-get update && apt-get install -y curl bash && \
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \
-    export NVM_DIR="$HOME/.nvm" && \
-    . "$NVM_DIR/nvm.sh" && \
-    nvm install --lts=iron && \
-    nvm use --lts=iron && \
-    ln -s "$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node)/bin/node" /usr/bin/node && \
-    ln -s "$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node)/bin/npm" /usr/bin/npm && \
-    node -v && npm -v
+RUN apt-get update && \
+    apt-get install -y wget xz-utils
 
-# set the working directory inside the container
-WORKDIR /src
+RUN apt-get update && \
+    apt-get install -y dotnet-sdk-8.0 
 
-# copy the entire solution to the container
-COPY . ./
+RUN wget https://nodejs.org/dist/v20.19.3/node-v20.19.3-linux-x64.tar.xz && \
+    tar -xf node-v20.19.3-linux-x64.tar.xz && \
+    mv node-v20.19.3-linux-x64 /usr/local/node && \
+    ln -s /usr/local/node/bin/node /usr/local/bin/node && \
+    ln -s /usr/local/node/bin/npm /usr/local/bin/npm && \
+    ln -s /usr/local/node/bin/npx /usr/local/bin/npx && \
+    rm node-v20.19.3-linux-x64.tar.xz
 
-# install dependencies for project
-WORKDIR /src/yet-enibla.Web
-RUN npm install
-
-# set the working directory inside the container
-WORKDIR /src
-
-# restore dependencies of the .sln file
-RUN dotnet restore yet-enibla.sln
-
-# build the application project within the solution in release mode
-RUN dotnet publish yet-enibla.Web/yet-enibla.Web.csproj -c Release -o /app/publish
-
-# use the .net runtime image for running the application
-FROM mcr.microsoft.com/dotnet/runtime:9.0
-
-# working directory for the run time container
 WORKDIR /app
 
-# copy the published application from the build stage
-COPY  --from=build /app/publish .
+COPY . /app
 
-# expose the default port the application will run on
-EXPOSE 80
-EXPOSE 443
+WORKDIR /app/yet-enibla.Web
 
-# set the command to run the application
-ENTRYPOINT ["dotnet", "yet-enibla.web.dll"]
+RUN dotnet build "/app/yet-enibla.Web/yet-enibla.Web.csproj" -c Release -o /publish
+
+RUN dotnet publish "/app/yet-enibla.Web/yet-enibla.Web.csproj" -c Release -o /publish /p:UseAppHost=false
+
+# STAGE 2 ->> Run Time Stage
+FROM ubuntu:22.04
+
+RUN apt-get update && \
+    apt-get install -y dotnet-sdk-8.0 && \
+    apt-get install -y aspnetcore-runtime-8.0 && \
+    apt-get install -y wget xz-utils
+
+RUN wget https://nodejs.org/dist/v20.19.3/node-v20.19.3-linux-x64.tar.xz && \
+    tar -xf node-v20.19.3-linux-x64.tar.xz && \
+    mv node-v20.19.3-linux-x64 /usr/local/node && \
+    ln -s /usr/local/node/bin/node /usr/local/bin/node && \
+    ln -s /usr/local/node/bin/npm /usr/local/bin/npm && \
+    ln -s /usr/local/node/bin/npx /usr/local/bin/npx && \
+    rm node-v20.19.3-linux-x64.tar.xz
+
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+WORKDIR /publish
+COPY --from=build /publish .
+
+WORKDIR /app
+COPY --from=build /app .
+
+WORKDIR /publish
+
+EXPOSE 3000
+
+ENTRYPOINT ["dotnet", "/publish/yet-enibla.Web.dll"]

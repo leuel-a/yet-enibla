@@ -13,11 +13,10 @@ node_modules/
 .idea/
 .vscode/
 
-# asp.net secrets
-**/appsettings.*.json
-secrets.json
-
 # others
 *.log
 *.DS_Store
 
+# enviroment variables
+.env
+.env.*

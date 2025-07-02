@@ -27,11 +27,21 @@ public class Create : PageModel
     {
         if (!ModelState.IsValid) return Page();
 
-        _logger.LogInformation(CreateRestaurantValue.ToJson());
-        Debug.Assert(_dbContext.Restaurants != null, "_dbContext.Restaurants != null, the table exists");
+        try
+        {
+            _logger.LogInformation(CreateRestaurantValue.ToJson());
+            Debug.Assert(_dbContext.Restaurants != null, "_dbContext.Restaurants != null, the table exists");
 
-        await _dbContext.Restaurants.AddAsync(CreateRestaurantValue);
-        await _dbContext.SaveChangesAsync();
+            await _dbContext.Restaurants.AddAsync(CreateRestaurantValue);
+            await _dbContext.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("An error occured while creating the restaurant: {Message}", e.Message);
+
+            // TODO: here we will add a toast message on the frontend, for now just return to the page
+            return Page();
+        }
 
         return RedirectToPage("/index");
     }
